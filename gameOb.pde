@@ -19,4 +19,11 @@ class GameObject{
   public void show(){
     image(sprite,x-w/2,y-h/2,w,h);
   }
+  public void move(){
+    
+  }
+  public void update(){
+    this.move();
+    this.show();
+  }
 }
