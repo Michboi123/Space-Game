@@ -1,27 +1,76 @@
+import java.io.File;
+boolean up,down,left,right,space;
 HashMap<String,PImage> imagemap;
-PImage playership,missile;
+PImage playership,missile,enemyship,enemy2ship,enemymissile;
 Player pla;
-Missle mis;
+Enemy1 e;
+Enemy2 e2;
+Enemymis emis;
+ArrayList<GameObject> allobjects=new ArrayList<GameObject>(); 
+Timer e1t,e2t;
 void setup(){
+  String folderpath=sketchPath()+"/Images";
+  File folder=new File(folderpath);
+  String[] filenames=folder.list();
   size(800,800);
   imagemap=new HashMap<String,PImage>();
-  playership=loadImage("Images/playerShip.png");
-  missile=loadImage("Images/missileimage.png");
-  imagemap.put("playership",playership);
-  imagemap.put("missile",missile);
+  for(int e=0;e<filenames.length;e++){
+    PImage image=loadImage("Images/"+filenames[e]);
+    String k=filenames[e].substring(0,filenames[e].length()-4);
+    imagemap.put(k,image);
+  }
   pla=new Player();
-  mis=new Missle();
+  e=new Enemy1(200,200);
+  e2=new Enemy2(3,7);
+  emis=new Enemymis(234,56);
+  e1t=new Timer(1000);
+  e2t=new Timer(1000);
 }
 void draw(){
   background(255);
-  mis.update();
-  pla.update();
+  for(int i=0;i<allobjects.size();i++){
+    allobjects.get(i).update() ;
+  } 
+  if(e1t.checktime()==true){
+    new Enemy1(random(50,750),0);
+    e1t.setinterval(int(random(200,2000)));
+  }
+  if(e2t.checktime()==true){
+    new Enemy2(random(50,750),0);
+    e2t.setinterval(int(random(350,1750)));
+  }
 }
-//1)write a move function for GameObject, missle, and player
-//2) write an update function for GameObject
-//3) in the update function of the GameObject run the move function and the show function
-//4) in the move function of the missle make the missile move up
-//5) in the move function of the player make the player move right (if you can program up down left right controls that would be better)
-//6) in the draw function, instead of telling the missile and player to show up, tell the missile and the player to update
-//https://processing.org/reference/
-//https://keycode.info/
+public void keyPressed(){
+  if(keyCode==UP){
+    up=true;
+  }
+  if(keyCode==DOWN){
+    down=true;
+  }
+  if(keyCode==LEFT){
+    left=true;
+  }
+  if(keyCode==RIGHT){
+    right=true;
+  }
+  if(keyCode==32){
+    space=true;
+  }
+}
+public void keyReleased(){
+  if(keyCode==UP){
+    up=false;
+  }
+  if(keyCode==DOWN){
+    down=false;
+  }
+  if(keyCode==LEFT){
+    left=false;
+  }
+  if(keyCode==RIGHT){
+    right=false;
+  }
+  if(keyCode==32){
+    space=false;
+  }
+}

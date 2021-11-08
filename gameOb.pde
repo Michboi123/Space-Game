@@ -15,6 +15,7 @@ class GameObject{
     w=ww;
     h=hh;
     sprite=ss;
+    allobjects.add(this);
   }
   public void show(){
     image(sprite,x-w/2,y-h/2,w,h);

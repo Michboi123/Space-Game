@@ -1,6 +1,6 @@
 class Missle extends GameObject{
-  public Missle(){
-    super(400,300,20,50,imagemap.get("missile"));
+  public Missle(float x,float y){
+    super(x,y,20,50,imagemap.get("missileimage"));
   }
   public void move(){
     y=y-5;
