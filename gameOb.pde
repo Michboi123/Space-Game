@@ -8,17 +8,23 @@
 //4)Use the player class and missile class to create an object and make it show up on the screen
 class GameObject{
   float x, y, w, h;
+  boolean alive;
+  String tag;
   PImage sprite;
   public GameObject(float xx,float yy, float ww, float hh, PImage ss){
     x=xx;
     y=yy;
     w=ww;
     h=hh;
+    alive=true;
+    tag="";
     sprite=ss;
     allobjects.add(this);
   }
   public void show(){
-    image(sprite,x-w/2,y-h/2,w,h);
+    if(alive==true){    
+      image(sprite,x-w/2,y-h/2,w,h);
+    }
   }
   public void move(){
     

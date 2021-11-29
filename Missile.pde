@@ -8,5 +8,14 @@ class Missle extends GameObject{
   public void update(){
     this.show();
     this.move();
+    this.checkcollision();
+  }
+  public void checkcollision(){
+    for(int a=0;a<allobjects.size();a++){
+      if(allobjects.get(a).tag=="enemy"&&distance(this,allobjects.get(a))){
+        allobjects.get(a).alive=false;
+        alive=false;
+      }
+    }
   }
 }
